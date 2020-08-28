@@ -63,4 +63,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ## Comandos
 
 - composer installer
-- php artisan key:generate# laravel-moviesCRUD-mysql
+- php artisan key:generate
