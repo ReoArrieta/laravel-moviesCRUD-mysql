@@ -26,11 +26,17 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                <ul class="navbar-nav">
+                <a class="navbar-brand" href="{{ url('/home') }}">Laravel</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/movies') }}">Movies</a>
+                    </li>
+                </ul>
+                <!-- <a class="nav-link navbar" href="{{ url('/movies') }}">
+                    {{'Movies'}}
+                </a> -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
