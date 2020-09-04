@@ -17,8 +17,8 @@
                                 <th>Descripción</th>
                                 <th>Usuario</th>
                                 <th>Estado</th>
-                                <th>Acciones</th>
-                                <th></th>
+                                <th>Editar</th>
+                                <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,7 +29,7 @@
                                 <td>{{ $movie->user }}</td>
                                 <td>{{ $movie->status }}</td>
                                 <td>
-                                    <a href="{{url('movies/'.$movie->id.'/edit')}}" class="btn btn-secondary">
+                                    <a href="{{url('movies/' . $movie->id . '/edit')}}" class="btn btn-secondary">
                                         ✎ Editar
                                     </a>
                                 </td>

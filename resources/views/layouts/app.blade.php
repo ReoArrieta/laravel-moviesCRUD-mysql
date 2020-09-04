@@ -29,14 +29,16 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
                 <ul class="navbar-nav">
-                <a class="navbar-brand" href="{{ url('/home') }}">Laravel</a>
+                    <a class="navbar-brand" href="{{ url('/home') }}">Laravel</a>
+                    @if (Auth::user())
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/movies') }}">Movies</a>
                     </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/movies') }}">Movies</a>
+                    </li> -->
+                    @endif
                 </ul>
-                <!-- <a class="nav-link navbar" href="{{ url('/movies') }}">
-                    {{'Movies'}}
-                </a> -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
