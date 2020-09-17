@@ -27,3 +27,4 @@ Route::resource('/movieRentals','MovieRentalsController')->middleware('auth');
 Route::resource('/movies','MoviesController')->middleware('auth');
 Route::resource('/rentals','RentalsController')->middleware('auth');
 Route::resource('/users', 'UsersController')->middleware('auth');
+Route::get('/pdf', 'PDFController@PDF')->name('pdf');

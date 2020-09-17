@@ -7,8 +7,8 @@
             <div class="card">
                 <div class="card-header">
                     <a href="{{route('movies.create')}}" class="btn btn-primary">Películas</a>
+                    <a href="{{route('pdf')}}" class="btn btn-success">Descargar</a>
                 </div>
-
                 <div class="card-body">
                     <table class="table">
                         <thead class="thead-light">
