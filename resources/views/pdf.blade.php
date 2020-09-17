@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/materia/bootstrap.min.css">
     <title>Películas</title>
 </head>
 
@@ -16,7 +16,7 @@
 
     <div class="card-body">
         <table class="table">
-            <thead class="thead-light">
+            <thead class="thead-dark">
                 <tr>
                     <th>Nombre</th>
                     <th>Descripción</th>
