@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\CategoryMovie;
 use App\Movie;
-use App\Status;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class MoviesController extends Controller
+class CategoryMoviesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,17 +16,16 @@ class MoviesController extends Controller
      */
     public function index()
     {
-        $movies = Movie::select(
-            'movies.id',
-            'movies.name as name',
-            'movies.description',
-            'users.name as user',
-            'statuses.name as status'
+        $categoryMovies = CategoryMovie::select(
+            'category_movies.id',
+            'movies.name as movie',
+            'categories.name as category'
         )
-            ->join('users', 'movies.user_id', '=', 'users.id')
-            ->join('statuses', 'movies.status_id', '=', 'statuses.id')
-            ->get();
-        return view('movies.index', compact('movies'));
+        ->join('movies','category_movies.movie_id', '=', 'movies.id')
+        ->join('categories','category_movies.category_id', '=', 'categories.id')
+        ->get();
+
+        return view('categoryMovies.index', compact('categoryMovies'));
     }
 
     /**
@@ -36,7 +35,9 @@ class MoviesController extends Controller
      */
     public function create()
     {
-        return view('movies.create');
+        $movies = Movie::all();
+        $categories = Category::all();
+        return view('categoryMovies.create', compact('movies','categories'));
     }
 
     /**
@@ -47,16 +48,12 @@ class MoviesController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
+        $categoryMovie = new CategoryMovie();
+        $categoryMovie->movie_id = $request->movie;
+        $categoryMovie->category_id = $request->category;
+        $categoryMovie->save();
 
-        $movie = new Movie();
-        $movie->name = $request->name;
-        $movie->description = $request->description;
-        $movie->user_id = $user->id;
-        $movie->status_id = 1;
-        $movie->save();
-
-        return redirect('movies');
+        return redirect('categoryMovies');
     }
 
     /**
@@ -78,9 +75,10 @@ class MoviesController extends Controller
      */
     public function edit($id)
     {
-        $movie = Movie::find($id);
-        $statuses = Status::all();
-        return view('movies.update', compact('movie', 'statuses'));
+        $categoryMovie = CategoryMovie::find($id);
+        $movies = Movie::all();
+        $categories = Category::all();
+        return view('categoryMovies.update', compact('categoryMovie','movies','categories'));
     }
 
     /**
@@ -92,13 +90,12 @@ class MoviesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $movie = Movie::find($id);
-        $movie->name = $request->name;
-        $movie->description = $request->description;
-        $movie->status_id = $request->status_id;
-        $movie->save();
+        $categoryMovie = CategoryMovie::find($id);
+        $categoryMovie->movie_id = $request->movie;
+        $categoryMovie->category_id = $request->category;
+        $categoryMovie->save();
 
-        return redirect('movies');
+        return redirect('categoryMovies');
     }
 
     /**
@@ -109,8 +106,8 @@ class MoviesController extends Controller
      */
     public function destroy($id)
     {
-        $movie = Movie::find($id);
-        $movie->delete();
+        $categoryMovie = CategoryMovie::find($id);
+        $categoryMovie->delete();
 
         return redirect()->back();
     }

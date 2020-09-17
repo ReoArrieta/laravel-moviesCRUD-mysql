@@ -6,23 +6,23 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Películas') }}</div>
+                <div class="card-header">{{ __('Peliculas') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('movies/' . $movie->id) }}" autocomplete="off">
+                    <form method="POST" action="{{ url('rentals/' . $rental->id) }}" autocomplete="off">
                         @method('put')
                         @csrf
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('Fecha inicio') }}</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="name" value="{{$movie->name}}" required autofocus>
+                                <input type="date" class="form-control" name="finicio" value="{{$rental->start_date}}" required autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('Descripción') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('Fecha fin') }}</label>
                             <div class="col-md-6">
-                                <textarea name="description" rows="5" class="form-control">{{$movie->description}}</textarea>
+                            <input type="date" class="form-control" name="ffin" value="{{$rental->end_date}}" required autofocus>
                             </div>
                         </div>
 

@@ -6,7 +6,7 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{route('movies.create')}}" class="btn btn-primary">Películas</a>
+                    <a href="#" class="btn btn-primary">Usuarios</a>
                 </div>
 
                 <div class="card-body">
@@ -14,27 +14,23 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th>Usuario</th>
-                                <th>Estado</th>
+                                <th>Correo</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($movies as $movie)
+                            @foreach($users as $user)
                             <tr>
-                                <td>{{ $movie->name }}</td>
-                                <td>{{ $movie->description }}</td>
-                                <td>{{ $movie->user }}</td>
-                                <td>{{ $movie->status }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
                                 <td>
-                                    <a href="{{url('movies/' . $movie->id . '/edit')}}" class="btn btn-secondary">
+                                    <a href="{{url('users/' . $user->id . '/edit')}}" class="btn btn-secondary">
                                         ✎ Editar
                                     </a>
                                 </td>
                                 <td>
-                                    <form action="{{url('movies/' . $movie->id)}}" method="post">
+                                    <form action="{{url('users/' . $user->id)}}" method="post">
                                         @method('delete')
                                         @csrf
                                         <input type="submit" class="btn btn-danger" value="🗑 Eliminar">

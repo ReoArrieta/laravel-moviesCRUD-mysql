@@ -6,32 +6,28 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Películas') }}</div>
+                <div class="card-header">{{ __('Categoría Peliculas') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('movies/' . $movie->id) }}" autocomplete="off">
+                    <form method="POST" action="{{ url('categoryMovies/' . $categoryMovie->id) }}" autocomplete="off">
                         @method('put')
                         @csrf
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('Peliculas') }}</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="name" value="{{$movie->name}}" required autofocus>
+                                <select name="movie" class="form-control">
+                                    @foreach ($movies as $movie)
+                                    <option value="{{$movie->id}}">{{$movie->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('Descripción') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('Categorías') }}</label>
                             <div class="col-md-6">
-                                <textarea name="description" rows="5" class="form-control">{{$movie->description}}</textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">{{ __('Estados') }}</label>
-                            <div class="col-md-6">
-                                <select name="status_id" class="form-control">
-                                    @foreach ($statuses as $status)
-                                    <option value="{{$status->id}}">{{$status->name}}</option>
+                                <select name="category" class="form-control">
+                                    @foreach ($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
                                 </select>
                             </div>

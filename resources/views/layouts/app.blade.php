@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="es-co">
 
 <head>
     <meta charset="utf-8">
@@ -32,11 +32,23 @@
                     <a class="navbar-brand" href="{{ url('/home') }}">Laravel</a>
                     @if (Auth::user())
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/movies') }}">Movies</a>
+                        <a class="nav-link" href="{{ url('/movies') }}">Películas</a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/movies') }}">Movies</a>
-                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/categories') }}">Categorías</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/categoryMovies') }}">Categoria Películas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/rentals') }}">Rentas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/movieRentals') }}">Película Rentas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/users') }}">Usuarios</a>
+                    </li>
                     @endif
                 </ul>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

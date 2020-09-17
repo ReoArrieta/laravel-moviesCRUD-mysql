@@ -21,4 +21,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('movies','MoviesController')->middleware('auth');
+Route::resource('/categories','CategoriesController')->middleware('auth');
+Route::resource('/categoryMovies','CategoryMoviesController')->middleware('auth');
+Route::resource('/movieRentals','MovieRentalsController')->middleware('auth');
+Route::resource('/movies','MoviesController')->middleware('auth');
+Route::resource('/rentals','RentalsController')->middleware('auth');
+Route::resource('/users', 'UsersController')->middleware('auth');

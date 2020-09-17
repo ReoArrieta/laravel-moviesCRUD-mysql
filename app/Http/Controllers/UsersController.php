@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Movie;
-use App\Status;
+use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class MoviesController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,17 +14,8 @@ class MoviesController extends Controller
      */
     public function index()
     {
-        $movies = Movie::select(
-            'movies.id',
-            'movies.name as name',
-            'movies.description',
-            'users.name as user',
-            'statuses.name as status'
-        )
-            ->join('users', 'movies.user_id', '=', 'users.id')
-            ->join('statuses', 'movies.status_id', '=', 'statuses.id')
-            ->get();
-        return view('movies.index', compact('movies'));
+        $users = User::all();
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -36,7 +25,7 @@ class MoviesController extends Controller
      */
     public function create()
     {
-        return view('movies.create');
+        return view('users.create');
     }
 
     /**
@@ -47,16 +36,7 @@ class MoviesController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
-
-        $movie = new Movie();
-        $movie->name = $request->name;
-        $movie->description = $request->description;
-        $movie->user_id = $user->id;
-        $movie->status_id = 1;
-        $movie->save();
-
-        return redirect('movies');
+        //
     }
 
     /**
@@ -78,9 +58,8 @@ class MoviesController extends Controller
      */
     public function edit($id)
     {
-        $movie = Movie::find($id);
-        $statuses = Status::all();
-        return view('movies.update', compact('movie', 'statuses'));
+        $user = User::find($id);
+        return view('users.update', compact('user'));
     }
 
     /**
@@ -92,13 +71,12 @@ class MoviesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $movie = Movie::find($id);
-        $movie->name = $request->name;
-        $movie->description = $request->description;
-        $movie->status_id = $request->status_id;
-        $movie->save();
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->mail;
+        $user->save();
 
-        return redirect('movies');
+        return redirect('users');
     }
 
     /**
@@ -109,8 +87,8 @@ class MoviesController extends Controller
      */
     public function destroy($id)
     {
-        $movie = Movie::find($id);
-        $movie->delete();
+        $user = User::find($id);
+        $user->delete();
 
         return redirect()->back();
     }

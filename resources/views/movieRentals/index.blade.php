@@ -6,35 +6,37 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{route('movies.create')}}" class="btn btn-primary">Películas</a>
+                    <a href="{{route('movieRentals.create')}}" class="btn btn-primary">Película Rentas</a>
                 </div>
 
                 <div class="card-body">
                     <table class="table">
                         <thead class="thead-light">
                             <tr>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th>Usuario</th>
-                                <th>Estado</th>
-                                <th>Editar</th>
+                                <th>id</th>
+                                <th>Pelicula</th>
+                                <th>observacion</th>
+                                <th>precio</th>
+                                <th>fecha inicio</th>
+                                <th>editar</th>
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($movies as $movie)
+                            @foreach($movieRentals as $rental)
                             <tr>
-                                <td>{{ $movie->name }}</td>
-                                <td>{{ $movie->description }}</td>
-                                <td>{{ $movie->user }}</td>
-                                <td>{{ $movie->status }}</td>
+                                <td>{{ $rental->id }}</td>
+                                <td>{{ $rental->movie }}</td>
+                                <td>{{ $rental->observations }}</td>
+                                <td>{{ $rental->price }}</td>
+                                <td>{{ $rental->rental }}</td>
                                 <td>
-                                    <a href="{{url('movies/' . $movie->id . '/edit')}}" class="btn btn-secondary">
-                                        ✎ Editar
+                                    <a href="{{url('movieRentals/' . $rental->id . '/edit')}}" class="btn btn-secondary">
+                                    ✎ Editar
                                     </a>
                                 </td>
                                 <td>
-                                    <form action="{{url('movies/' . $movie->id)}}" method="post">
+                                    <form action="{{url('movieRentals/' . $rental->id)}}" method="post">
                                         @method('delete')
                                         @csrf
                                         <input type="submit" class="btn btn-danger" value="🗑 Eliminar">

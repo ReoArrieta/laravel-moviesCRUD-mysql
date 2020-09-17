@@ -6,7 +6,7 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{route('movies.create')}}" class="btn btn-primary">Películas</a>
+                    <a href="{{route('categories.create')}}" class="btn btn-primary">Categorías</a>
                 </div>
 
                 <div class="card-body">
@@ -14,27 +14,23 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th>Usuario</th>
                                 <th>Estado</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($movies as $movie)
+                            @foreach($categories as $category)
                             <tr>
-                                <td>{{ $movie->name }}</td>
-                                <td>{{ $movie->description }}</td>
-                                <td>{{ $movie->user }}</td>
-                                <td>{{ $movie->status }}</td>
+                                <td>{{ $category->name }}</td>
+                                <td>{{ $category->status }}</td>
                                 <td>
-                                    <a href="{{url('movies/' . $movie->id . '/edit')}}" class="btn btn-secondary">
+                                    <a href="{{url('categories/' . $category->id . '/edit')}}" class="btn btn-secondary">
                                         ✎ Editar
                                     </a>
                                 </td>
                                 <td>
-                                    <form action="{{url('movies/' . $movie->id)}}" method="post">
+                                    <form action="{{url('categories/' . $category->id)}}" method="post">
                                         @method('delete')
                                         @csrf
                                         <input type="submit" class="btn btn-danger" value="🗑 Eliminar">

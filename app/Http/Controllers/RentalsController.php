@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Movie;
+use App\Rental;
 use App\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class MoviesController extends Controller
+class RentalsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,17 +16,19 @@ class MoviesController extends Controller
      */
     public function index()
     {
-        $movies = Movie::select(
-            'movies.id',
-            'movies.name as name',
-            'movies.description',
+        $rentals = Rental::select([
+            'rentals.id',
+            'rentals.start_date as inicio',
+            'rentals.end_date as fin',
+            'rentals.total',
             'users.name as user',
-            'statuses.name as status'
-        )
-            ->join('users', 'movies.user_id', '=', 'users.id')
-            ->join('statuses', 'movies.status_id', '=', 'statuses.id')
-            ->get();
-        return view('movies.index', compact('movies'));
+            'statuses.name as estatus'
+
+        ])
+        ->join('users', 'rentals.user_id', '=', 'users.id')
+        ->join('statuses', 'rentals.status_id', '=', 'statuses.id')
+        ->get();
+        return view('Rentals.index', compact('rentals'));
     }
 
     /**
@@ -36,7 +38,7 @@ class MoviesController extends Controller
      */
     public function create()
     {
-        return view('movies.create');
+        return view('Rentals.create');
     }
 
     /**
@@ -49,14 +51,15 @@ class MoviesController extends Controller
     {
         $user = Auth::user();
 
-        $movie = new Movie();
-        $movie->name = $request->name;
-        $movie->description = $request->description;
-        $movie->user_id = $user->id;
-        $movie->status_id = 1;
-        $movie->save();
+        $rental = new Rental();
+        $rental->start_date = $request->finicio;
+        $rental->end_date = $request->ffin;
+        $rental->total = $request->total;
+        $rental->user_id= $user->id;
+        $rental->status_id = 1;
+        $rental->save();
 
-        return redirect('movies');
+        return redirect('rentals');
     }
 
     /**
@@ -78,9 +81,9 @@ class MoviesController extends Controller
      */
     public function edit($id)
     {
-        $movie = Movie::find($id);
+        $rental = Rental::find($id);
         $statuses = Status::all();
-        return view('movies.update', compact('movie', 'statuses'));
+        return view('Rentals.update', compact('rental','statuses'));
     }
 
     /**
@@ -92,13 +95,15 @@ class MoviesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $movie = Movie::find($id);
-        $movie->name = $request->name;
-        $movie->description = $request->description;
-        $movie->status_id = $request->status_id;
-        $movie->save();
+        $user = Auth::user();
+        $rental = Rental::find($id);
+        $rental->start_date = $request->finicio;
+        $rental->end_date = $request->ffin;
+        $rental->user_id= $user->id;
+        $rental->status_id =$request->status_id;
+        $rental->save();
 
-        return redirect('movies');
+        return redirect('rentals');
     }
 
     /**
@@ -109,9 +114,9 @@ class MoviesController extends Controller
      */
     public function destroy($id)
     {
-        $movie = Movie::find($id);
-        $movie->delete();
-
+        $rental = Rental::find($id);
+        $rental->delete();
+        
         return redirect()->back();
     }
 }
