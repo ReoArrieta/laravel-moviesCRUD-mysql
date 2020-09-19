@@ -55,6 +55,6 @@ Route::put('movie/rentals/{id}','api\MovieRentalsController@update')->middleware
 Route::delete('movie/rentals/{id}','api\MovieRentalsController@delete')->middleware('auth:api');
 
 // Users
-Route::get('/Users','api\UsersController@read')->middleware('auth:api');
-Route::put('/Users/{id}','api\UsersController@update')->middleware('auth:api');
-Route::delete('/Users/{id}','api\UsersController@delete')->middleware('auth:api');
+Route::get('/users','api\UsersController@read')->middleware('auth:api');
+Route::put('/users/{id}','api\UsersController@update')->middleware('auth:api');
+Route::delete('/users/{id}','api\UsersController@delete')->middleware('auth:api');

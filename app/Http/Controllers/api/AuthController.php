@@ -33,15 +33,5 @@ class AuthController extends Controller
             return response()->error($th->getMessage(), $th->getCode());
         }
     }
-
-    // public function allUsers()
-    // {
-    //     try {
-    //         $users = User::all();
-
-    //         return response()->json($users, 200);
-    //     } catch (\Throwable $th) {
-    //         return response()->error($th->getMessage(), $th->getCode());
-    //     }
-    // }
+    
 }
