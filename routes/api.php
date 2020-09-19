@@ -18,8 +18,6 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-// Route::get('/newapi', 'MoviesCotroller@index');
-
 // Auth
 Route::post('/login','AuthController@login');
 Route::post('/signup', 'AuthController@signup');
