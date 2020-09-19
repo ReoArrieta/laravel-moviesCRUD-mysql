@@ -47,3 +47,14 @@ Route::post('/rentals','api\RentalsController@create')->middleware('auth:api');
 Route::get('/rentals','api\RentalsController@read')->middleware('auth:api');
 Route::put('/rentals/{id}','api\RentalsController@update')->middleware('auth:api');
 Route::delete('/rentals/{id}','api\RentalsController@delete')->middleware('auth:api');
+
+// Movie Rentals 
+Route::post('movie/rentals','api\MovieRentalsController@create')->middleware('auth:api');
+Route::get('movie/rentals','api\MovieRentalsController@read')->middleware('auth:api');
+Route::put('movie/rentals/{id}','api\MovieRentalsController@update')->middleware('auth:api');
+Route::delete('movie/rentals/{id}','api\MovieRentalsController@delete')->middleware('auth:api');
+
+// Users
+Route::get('/Users','api\UsersController@read')->middleware('auth:api');
+Route::put('/Users/{id}','api\UsersController@update')->middleware('auth:api');
+Route::delete('/Users/{id}','api\UsersController@delete')->middleware('auth:api');
