@@ -14,12 +14,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::get('/newapi', 'MoviesCotroller@index');
+// Route::get('/newapi', 'MoviesCotroller@index');
 
-Route::post('/user/login','AuthController@login');
+// Auth
+Route::post('/login','AuthController@login');
+Route::post('/signup', 'AuthController@signup');
 
-Route::get('/user/all', 'AuthController@allUsers')->middleware('auth:api');
+// Movies
+Route::post('/movies','api\MoviesController@create')->middleware('auth:api');
+Route::get('/movies','api\MoviesController@read')->middleware('auth:api');
+Route::put('/movies/{id}','api\MoviesController@update')->middleware('auth:api');
+Route::delete('/movies/{id}','api\MoviesController@delete')->middleware('auth:api');
+
+// Categories
+Route::post('/categories','api\CategoriesController@create')->middleware('auth:api');
+Route::get('/categories','api\CategoriesController@read')->middleware('auth:api');
+Route::put('/categories/{id}','api\CategoriesController@update')->middleware('auth:api');
+Route::delete('/categories/{id}','api\CategoriesController@delete')->middleware('auth:api');
+
+// Category Movies
+Route::post('/category/movies','api\CategoryMoviesController@create')->middleware('auth:api');
+Route::get('/category/movies','api\CategoryMoviesController@read')->middleware('auth:api');
+Route::put('/category/movies/{id}','api\CategoryMoviesController@update')->middleware('auth:api');
+Route::delete('/category/movies/{id}','api\CategoryMoviesController@delete')->middleware('auth:api');
+
+// Rentals
+Route::post('/rentals','api\RentalsController@create')->middleware('auth:api');
+Route::get('/rentals','api\RentalsController@read')->middleware('auth:api');
+Route::put('/rentals/{id}','api\RentalsController@update')->middleware('auth:api');
+Route::delete('/rentals/{id}','api\RentalsController@delete')->middleware('auth:api');
