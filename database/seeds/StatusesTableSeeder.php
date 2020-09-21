@@ -14,12 +14,12 @@ class StatusesTableSeeder extends Seeder
     public function run()
     {
         $status = new Status();
-        $status->name = 'activo';
+        $status->name = 'Activo';
         $status->type_status_id = '1';
         $status->save();
 
         $status = new Status();
-        $status->name = 'inactivo';
+        $status->name = 'Inactivo';
         $status->type_status_id = '1';
         $status->save();
     }

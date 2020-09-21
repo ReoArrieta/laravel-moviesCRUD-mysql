@@ -19,12 +19,13 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Auth
-Route::post('/login','AuthController@login');
-Route::post('/signup', 'AuthController@signup');
+Route::post('/login','api\AuthController@login');
+Route::post('/signup', 'api\AuthController@signup');
 
 // Movies
 Route::post('/movies','api\MoviesController@create')->middleware('auth:api');
 Route::get('/movies','api\MoviesController@read')->middleware('auth:api');
+Route::get('/movies/{id}','api\MoviesController@readMovie')->middleware('auth:api');
 Route::put('/movies/{id}','api\MoviesController@update')->middleware('auth:api');
 Route::delete('/movies/{id}','api\MoviesController@delete')->middleware('auth:api');
 
@@ -56,3 +57,6 @@ Route::delete('/movie/rentals/{id}','api\MovieRentalsController@delete')->middle
 Route::get('/users','api\UsersController@read')->middleware('auth:api');
 Route::put('/users/{id}','api\UsersController@update')->middleware('auth:api');
 Route::delete('/users/{id}','api\UsersController@delete')->middleware('auth:api');
+
+// Cors 
+// composer require fruitcake/laravel-cors

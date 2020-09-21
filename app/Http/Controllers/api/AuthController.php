@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
-use Illuminate\Http\Request;
-// use mysql_xdevapi\Exception;
+use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -19,9 +19,9 @@ class AuthController extends Controller
 
             $token = $user->createToken('Auth Token')->accessToken;
 
-            return response()->json($token, 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(['token' => $token, 'user' => $user], 200);
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 
@@ -29,9 +29,8 @@ class AuthController extends Controller
     {
         try {
             return response()->json('User registered successfully', 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
-    
 }
