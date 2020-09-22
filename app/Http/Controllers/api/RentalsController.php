@@ -17,7 +17,7 @@ class RentalsController extends Controller
             $rental->end_date = $request->end_date;
             $rental->total = $request->total;
             $rental->user_id = $request->user_id;
-            $rental->status_id = 1;
+            $rental->status_id = $request->status_id;
             $rental->save();
 
             return response()->json(
@@ -38,8 +38,8 @@ class RentalsController extends Controller
         try {
             $rentals = Rental::select([
                 'rentals.id',
-                'rentals.start_date as inicio',
-                'rentals.end_date as fin',
+                'rentals.start_date',
+                'rentals.end_date',
                 'rentals.total',
                 'users.name as user',
                 'statuses.name as estatus'
