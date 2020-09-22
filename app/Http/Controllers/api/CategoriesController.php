@@ -13,12 +13,18 @@ class CategoriesController extends Controller
         try {
             $category = new Category();
             $category->name = $request->name;
-            $category->status_id = 1;
+            $category->status_id = $request->status_id;
             $category->save();
 
-            return response()->json(['Category create successfully', $category], 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Category create successfully',
+                    'Data' => $category
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 
@@ -33,9 +39,32 @@ class CategoriesController extends Controller
                 ->join('statuses', 'categories.status_id', '=', 'statuses.id')
                 ->get();
 
-            return response()->json(['Categories read successfully', $categories], 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Categories read successfully',
+                    'Data' => $categories
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
+        }
+    }
+
+    public function readCategory($id)
+    {
+        try {
+            $category = Category::find($id);
+
+            return response()->json(
+                [
+                    'Message' => 'Category read successfully',
+                    'Data' => $category
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 
@@ -47,9 +76,15 @@ class CategoriesController extends Controller
             $category->status_id = $request->status_id;
             $category->save();
 
-            return response()->json(['Category update successfully', $category], 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Category update successfully',
+                    'Data' => $category
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 
@@ -59,9 +94,15 @@ class CategoriesController extends Controller
             $category = Category::find($id);
             $category->delete();
 
-            return response()->json(['Category delete successfully', $category], 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Category delete successfully',
+                    'Data' => $category
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 }

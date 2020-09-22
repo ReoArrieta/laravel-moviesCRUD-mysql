@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class RentalsController extends Controller
 {
+    // POST
     public function create(Request $request)
     {
         try {
@@ -19,12 +20,19 @@ class RentalsController extends Controller
             $rental->status_id = 1;
             $rental->save();
 
-            return response()->json(['Rental create successfully', $rental], 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Rental create successfully',
+                    'Data' => $rental
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 
+    // GET
     public function read()
     {
         try {
@@ -41,12 +49,37 @@ class RentalsController extends Controller
                 ->join('statuses', 'rentals.status_id', '=', 'statuses.id')
                 ->get();
 
-            return response()->json(['Rentals read successfully', $rentals], 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Rentals read successfully',
+                    'Data' => $rentals
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 
+    // GET
+    public function readRental($id)
+    {
+        try {
+            $rental = Rental::find($id);
+
+            return response()->json(
+                [
+                    'Message' => 'Rental read successfully',
+                    'Data' => $rental
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
+        }
+    }
+
+    // PUT
     public function update(Request $request, $id)
     {
         try {
@@ -58,21 +91,34 @@ class RentalsController extends Controller
             $rental->status_id = $request->status_id;
             $rental->save();
 
-            return response()->json(['Rental update successfully', $rental], 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Rental update successfully',
+                    'Data' => $rental
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 
+    // DELETE
     public function delete($id)
     {
         try {
             $rental = Rental::find($id);
             $rental->delete();
 
-            return response()->json(['Rental delete successfully', $rental], 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Rental update successfully',
+                    'Data' => $rental
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 }

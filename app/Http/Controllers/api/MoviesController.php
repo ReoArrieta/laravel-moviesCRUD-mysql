@@ -64,17 +64,6 @@ class MoviesController extends Controller
         try {
             $movie = Movie::find($id);
 
-            $movie->select(
-                'movies.id',
-                'movies.name as name',
-                'movies.description',
-                'users.name as user',
-                'statuses.name as status'
-            )
-                ->join('users', 'movies.user_id', '=', 'users.id')
-                ->join('statuses', 'movies.status_id', '=', 'statuses.id')
-                ->get();
-
             return response()->json(
                 [
                     'Message' => 'Movie read successfully',

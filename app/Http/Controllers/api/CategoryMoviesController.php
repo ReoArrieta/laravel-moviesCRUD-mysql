@@ -16,9 +16,15 @@ class CategoryMoviesController extends Controller
             $categoryMovie->category_id = $request->category_id;
             $categoryMovie->save();
 
-            return response()->json(['Category movie create successfully', $categoryMovie], 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Category movie create successfully',
+                    'Data' => $categoryMovie
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 
@@ -34,9 +40,32 @@ class CategoryMoviesController extends Controller
                 ->join('categories', 'category_movies.category_id', '=', 'categories.id')
                 ->get();
 
-            return response()->json(['Category movies read successfully', $categoryMovies], 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Category movies read successfully',
+                    'Data' => $categoryMovies
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
+        }
+    }
+
+    public function readCategoryMovie($id)
+    {
+        try {
+            $categoryMovie = CategoryMovie::find($id);
+
+            return response()->json(
+                [
+                    'Message' => 'Category movie read successfully',
+                    'Data' => $categoryMovie
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 
@@ -48,9 +77,15 @@ class CategoryMoviesController extends Controller
             $categoryMovie->category_id = $request->category_id;
             $categoryMovie->save();
 
-            return response()->json(['Category movies update successfully', $categoryMovie], 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Category movie update successfully',
+                    'Data' => $categoryMovie
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 
@@ -60,9 +95,15 @@ class CategoryMoviesController extends Controller
             $categoryMovie = CategoryMovie::find($id);
             $categoryMovie->delete();
 
-            return response()->json(['Category movie delete successfully', $categoryMovie], 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Category movie delete successfully',
+                    'Data' => $categoryMovie
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 }

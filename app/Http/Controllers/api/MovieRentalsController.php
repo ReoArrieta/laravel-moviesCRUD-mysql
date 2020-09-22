@@ -20,9 +20,15 @@ class MovieRentalsController extends Controller
             $movieRental->observations = $request->observations;
             $movieRental->save();
 
-            return response()->json(['Movie Rental create successfully', $movieRental], 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Movie Rental create successfully',
+                    'Data' => $movieRental
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 
@@ -42,9 +48,33 @@ class MovieRentalsController extends Controller
                 ->join('rentals', 'movie_rentals.rental_id', '=', 'rentals.id')
                 ->get();
 
-            return response()->json(['Movie Rentals read successfully', $movieRentals]);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Movie Rentals read successfully',
+                    'Data' => $movieRentals
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
+        }
+    }
+
+    // GET
+    public function readMovieRentals($id)
+    {
+        try {
+            $movieRental = MovieRental::find($id);
+
+            return response()->json(
+                [
+                    'Message' => 'Movie Rental read successfully',
+                    'Data' => $movieRental
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 
@@ -58,9 +88,15 @@ class MovieRentalsController extends Controller
             $movieRental->observations = $request->observations;
             $movieRental->save();
 
-            return response()->json(['Movie Rental update succesfully', $movieRental]);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Movie Rental update succesfully',
+                    'Data' => $movieRental
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 
@@ -72,9 +108,15 @@ class MovieRentalsController extends Controller
             $movieRental = MovieRental::find($id);
             $movieRental->delete();
 
-            return response()->json(['Movie Rental delete succesfully', $movieRental]);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Movie Rental delete succesfully',
+                    'Data' => $movieRental
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }
     }
 }

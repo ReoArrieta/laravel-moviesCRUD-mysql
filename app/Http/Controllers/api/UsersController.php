@@ -8,17 +8,43 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    // GET
     public function read()
     {
         try {
             $users = User::all();
 
-            return response()->json($users, 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'Users read successfully',
+                    'Data' => $users
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->error($e->getMessage(), $e->getCode());
         }
     }
 
+    // GET
+    public function readUser($id)
+    {
+        try {
+            $user = User::find($id);
+
+            return response()->json(
+                [
+                    'Message' => 'User read successfully',
+                    'Data' => $user
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->error($e->getMessage(), $e->getCode());
+        }
+    }
+
+    // PUT
     public function update(Request $request, $id)
     {
         try {
@@ -28,12 +54,19 @@ class UsersController extends Controller
             $user->email = $request->email;
             $user->save();
 
-            return response()->json(['User update successfully', $user], 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'User update successfully',
+                    'Data' => $user
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->error($e->getMessage(), $e->getCode());
         }
     }
 
+    // DELETE
     public function delete($id)
     {
         try {
@@ -41,9 +74,15 @@ class UsersController extends Controller
             $user = User::find($id);
             $user->delete();
 
-            return response()->json(['User delete successfully', $user], 200);
-        } catch (\Throwable $th) {
-            return response()->error($th->getMessage(), $th->getCode());
+            return response()->json(
+                [
+                    'Message' => 'User delete successfully',
+                    'Data' => $user
+                ],
+                200
+            );
+        } catch (\Exception $e) {
+            return response()->error($e->getMessage(), $e->getCode());
         }
     }
 }
