@@ -27,7 +27,7 @@ class UsersController extends Controller
     }
 
     // GET
-    public function readUser($id)
+    public function readOne($id)
     {
         try {
             $user = User::find($id);

@@ -61,7 +61,7 @@ class MovieRentalsController extends Controller
     }
 
     // GET
-    public function readMovieRentals($id)
+    public function readOne($id)
     {
         try {
             $movieRental = MovieRental::find($id);

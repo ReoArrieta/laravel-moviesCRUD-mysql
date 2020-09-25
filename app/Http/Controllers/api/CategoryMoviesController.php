@@ -52,7 +52,7 @@ class CategoryMoviesController extends Controller
         }
     }
 
-    public function readCategoryMovie($id)
+    public function readOne($id)
     {
         try {
             $categoryMovie = CategoryMovie::find($id);

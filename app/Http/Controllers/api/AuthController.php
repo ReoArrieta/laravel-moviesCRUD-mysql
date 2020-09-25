@@ -28,7 +28,19 @@ class AuthController extends Controller
     public function signup(Request $request)
     {
         try {
-            return response()->json('User registered successfully', 200);
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            return response()->json(
+                [
+                    'Message' => 'User registered successfully',
+                    'Data'=> $user
+                ],
+                200
+            );
         } catch (\Exception $e) {
             return response()->json(['Message' => $e->getMessage(), 'Code' => $e->getCode()]);
         }

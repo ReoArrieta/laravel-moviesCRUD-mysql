@@ -59,7 +59,7 @@ class MoviesController extends Controller
     }
 
     // GET
-    public function readMovie($id)
+    public function readOne($id)
     {
         try {
             $movie = Movie::find($id);

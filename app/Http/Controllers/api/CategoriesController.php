@@ -51,7 +51,7 @@ class CategoriesController extends Controller
         }
     }
 
-    public function readCategory($id)
+    public function readOne($id)
     {
         try {
             $category = Category::find($id);

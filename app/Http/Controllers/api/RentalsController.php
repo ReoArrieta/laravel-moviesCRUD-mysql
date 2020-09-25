@@ -42,7 +42,7 @@ class RentalsController extends Controller
                 'rentals.end_date',
                 'rentals.total',
                 'users.name as user',
-                'statuses.name as estatus'
+                'statuses.name as status'
 
             ])
                 ->join('users', 'rentals.user_id', '=', 'users.id')
@@ -62,7 +62,7 @@ class RentalsController extends Controller
     }
 
     // GET
-    public function readRental($id)
+    public function readOne($id)
     {
         try {
             $rental = Rental::find($id);
